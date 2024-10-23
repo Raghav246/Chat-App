@@ -47,12 +47,32 @@ const signUpUser = async (req, res) => {
 
 
 
-const loginUser = (req, res) => {
-    res.send("LoginUser")
-    console.log("user looged in")
+const loginUser =async (req, res) => {
+    try{
+    const{username,password}=req.body;
+    const user=await User.findOne({username});
+    const isPasswordCorrect=await bcrypt.compare(password,user.password || "");
+    if(!user || !isPasswordCorrect){
+        return res.status(400).json({error:'Invalid Credentials'})
+    }
+    generateTokenAndSetCookie(user?._id,res);
+    res.status(201).json({
+        _id: newUser._id,
+        name: newUser.name,
+        password: newUser.password,
+        profilePic: newUser.profilePic
+    })
+   }
+    catch(e){
+     res.status(500).json({error:"Internal Server ERROR"})
+    }
 }
 const userLogout = (req, res) => {
-    res.send("LogoutUser")
-    console.log("user looged out")
+    try{
+      res.cookie("jwt","",{maxAge:0})
+    }
+    catch(e){
+    return res.status(500).json({error:'Internal Server Error'})
+    }
 }
 export { signUpUser, loginUser, userLogout }
