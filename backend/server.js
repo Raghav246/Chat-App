@@ -1,4 +1,8 @@
-const express=require("express")
+import express from "express"
+import dotenv from "dotenv"
+import authRoutes from "./routes/auth.routes"
+dotenv.config();
 const app=express();
-const PORT=9000;
+const PORT=process.env.PORT||9000;
+app.use("/api/auth",authRoutes)
 app.listen(PORT,()=>console.log(`Server Connected on ${PORT}`))
