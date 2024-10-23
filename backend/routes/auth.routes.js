@@ -1,7 +1,9 @@
-const express=require("express");
-const router=express.Router();
+import { loginUser, signUpUser, userLogout } from "../controllers/auth.controllers.js";
+import express from "express"
 const app=express();
-router.get("/signup",)
-router.get("/login",)
-router.get("/logout",)
+const router=express.Router();
+router.get("/signup",signUpUser)
+router.get("/login",loginUser)
+router.get("/logout",userLogout)
+
 export default router;

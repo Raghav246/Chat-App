@@ -1,10 +1,13 @@
-const signUpUser=()=>{
-    console.log("user registered")
+const signUpUser=(req,res)=>{
+      res.send("signUpUser")
+   console.log("user registered")
 }
-const loginUser=()=>{
-    console.log("user looged in")
+const loginUser=(req,res)=>{
+    res.send("LoginUser")
+  console.log("user looged in")
 }
-const userLogout=()=>{
+const userLogout=(req,res)=>{
+    res.send("LogoutUser")
     console.log("user looged out")
 }
-export {signUpUser,loginUser}
+export {signUpUser,loginUser, userLogout}
