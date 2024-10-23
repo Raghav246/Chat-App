@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
 
-const connectToDb=async()=>{ 
+export const connectToDb=async()=>{ 
         try{
+     await mongoose.connect();
    
         }
         catch(e){
-
+          console.log(e.error)
         }
 
 }
